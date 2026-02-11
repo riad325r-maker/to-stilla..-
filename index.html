@@ -1,0 +1,132 @@
+<!DOCTYPE html><html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الى ستيلا </title><!-- Google Fonts --><link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Great+Vibes&display=swap" rel="stylesheet"><style>
+body{
+    margin:0;
+    padding:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    background: url('background.jpg') no-repeat center center/cover;
+    overflow:hidden;
+    color:white;
+    font-family:'Amiri', serif;
+}
+
+.overlay{
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,0.4));
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:20px;
+}
+
+.poem{
+    font-family:'Amiri', serif;
+    font-size:32px;
+    max-width:90%;
+    line-height:1.2;
+    text-shadow:0 0 10px rgba(0,0,0,0.5);
+}
+
+button{
+    margin-top:40px;
+    padding:15px 40px;
+    font-size:24px;
+    font-family:'Amiri', serif;
+    border:none;
+    border-radius:40px;
+    background:white;
+    color:black;
+    cursor:pointer;
+    opacity:0;
+    transition:0.5s ease;
+}
+
+button:hover{
+    transform:scale(1.1);
+}
+
+.message{
+    margin-top:30px;
+    font-size:28px;
+    text-align:center;
+    max-width:80%;
+    opacity:0;
+    transition:1s ease;
+}
+
+.burst-heart{
+    position:absolute;
+    font-size:24px;
+    animation:burst 1.5s ease-out forwards;
+    pointer-events:none;
+    color:#ff4e9b;
+}
+
+@keyframes burst{
+    0%{transform:translate(0,0) scale(0.5); opacity:1;}
+    100%{transform:translate(var(--x), var(--y)) scale(1.8); opacity:0;}
+}
+</style></head>
+<body><div class="overlay">
+    <div class="poem" id="poem">
+        وَلَعَلّنَا مَن بَعدِ بُعدٍ نَلتَقِي<br>
+        وَيَطيَبُ قَلبي عِندَمَا أَلْقَاكِ<br>
+        فَمَا رأَيتُ أَعَزّمَنكِ فيِ قَلبي<br>
+        وَمَا رَغبتُ فيِ أَحَدٍ سِواَكِ
+    </div><!-- Spotify Embed -->
+<iframe style="border-radius:12px; margin-top:20px;" 
+    src="https://open.spotify.com/embed/track/1wE7KjHcGUcpbObNpQ65ar" 
+    width="300" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
+</iframe>
+
+<button id="loveBtn">ستيلا تحبيني؟</button>
+
+<div class="message" id="msg">
+   وانا أحبك كمان يا غبيه أحبكككك <br>
+   ماعرفت وش اقولك بس اتمنى تعجبك <br>
+</div>
+
+</div><script>
+// أول 10 ثواني يظل الشعر
+setTimeout(()=>{
+    document.getElementById('poem').style.display='none';
+    const btn=document.getElementById('loveBtn');
+    btn.style.opacity='1';
+},13000);
+
+const btn=document.getElementById('loveBtn');
+const msg=document.getElementById('msg');
+
+btn.addEventListener('click',(e)=>{
+    msg.style.opacity='1';
+    createBurstHearts(e);
+});
+
+function createBurstHearts(event){
+    for(let i=0;i<30;i++){
+        const heart=document.createElement('div');
+        heart.className='burst-heart';
+        heart.innerHTML='❤';
+        const x=(Math.random()-0.5)*500+'px';
+        const y=(Math.random()-0.5)*500+'px';
+        heart.style.setProperty('--x', x);
+        heart.style.setProperty('--y', y);
+        heart.style.left=event.clientX+'px';
+        heart.style.top=event.clientY+'px';
+        document.body.appendChild(heart);
+        setTimeout(()=>heart.remove(),1500);
+    }
+}
+</script></body>
+</html>
